@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Estate Listings</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+
+    <style>
+      .badges {
+        width: 296px;
+        height: 204px;
+      }
+
+      .heading {
+        font-size: 32px;
+        font-weight: 600;
+        color: #2c3e50;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px;
+        font-family: Roboto;
+      }
+
+      .heading::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 90%;
+        height: 3px;
+        background: linear-gradient(to right, #007bff, #ff5722);
+        transform: translateX(-50%);
+        border-radius: 5px;
+      }
+      .poster {
+        height: 375px;
+      }
+      .Badges span {
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 1px;
+        padding: 4px 8px;
+        border-radius: 3px;
+      }
+
+      .poster img {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+      }
+
+      .poster_logo {
+        width: 64px;
+        height: 30px;
+        padding: 3px;
+        background: #ffffffe5;
+      }
+
+      .poster_rent {
+        width: 112px;
+        height: 30px;
+        text-align: center;
+        align-content: center;
+        background-color: var(--Other-Navy-Blue, #1b346f);
+        font-family: Roboto;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0%;
+        color: var(--Other-White, #ffffff);
+      }
+
+      .card_body {
+        height: 150px;
+        padding-top: 24px;
+        padding-right: 10px;
+        padding-bottom: 24px;
+        padding-left: 10px;
+        gap: 24px;
+      }
+
+      .property_name h5 {
+        font-family: Montserrat;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        color: #000000;
+      }
+
+      .property_name p {
+        font-family: Roboto;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        color: var(--Gray-Gray-500-TW, #6b7280);
+      }
+      .poster_info {
+        height: 59px;
+        padding: 0px;
+        margin-top: 15px;
+        justify-content: space-between;
+      }
+
+      .poster_info p {
+        width: 75px;
+        height: 22px;
+        gap: 2px;
+        border-radius: 2px;
+        padding: 0px;
+        font-family: Roboto;
+        font-weight: 900;
+        font-size: 10px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        color: var(--Gray-Gray-600-TW, #4a5565);
+      }
+      .poster_info img {
+        width: 16px;
+        height: 16px;
+        padding: 2px;
+      }
+
+      .poster_date {
+        display: flex;
+        flex-wrap: wrap;
+        width: 296px;
+        height: 30px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-top-width: 1px;
+        background-color: #f7f7f7;
+        border-top: 2px solid #9ca3af;
+        align-items: center;
+        padding: 0px;
+      }
+      .poster_time {
+        width: 91px;
+        height: 20px;
+        padding-left: 10px;
+        align-content: center;
+      }
+      .poster_time img {
+        width: 16px;
+        height: 16px;
+      }
+      .poster_time p {
+        font-family: Roboto;
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        color: #4a5565;
+      }
+      .poster_box {
+        position: sticky;
+        left: 221px;
+        width: 36px;
+        height: 28px;
+        border: 1px solid var(--Gray-Gray-400-Tw, #9ca3af);
+      }
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f8f9fa;
+        border-top: 2px solid #bbb8b8;
+        border-radius: 10px;
+        height: 28px;
+        padding: 5px 0px;
+      }
+      .footer-text {
+        display: flex;
+        align-items: center;
+        color: #6c757d;
+        font-family: Roboto;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 100%;
+        letter-spacing: 0%;
+      }
+      .footer-text img {
+        width: 23px;
+        height: 22px;
+        left: 6px;
+        padding: 2px;
+      }
+      .footer-icons {
+        height: 28px;
+        align-content: center;
+      }
+      .footer-icons img {
+        width: 36px;
+        height: 20px;
+        padding: 0px 7px;
+        color: var(--Gray-Gray-600-TW, #4a5565);
+      }
+      .icons_box {
+        border-left: 1px solid #4a5565;
+      }
+      .footer-icons i:hover {
+        color: #007bff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section>
+      <div class="container-fluid">
+        <h2 class="section-heading mb-4 px-3 heading">
+          Discover Our Featured Listings
+        </h2>
+
+        <div class="row">
+          <!-- Card 1 -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card poster shadow-lg mb-3">
+              <!-- Card Header -->
+              <div
+                class="card-header position-relative p-0 overflow-hidden Badges"
+              >
+                <!-- Status Badges -->
+                <span
+                  class="position-absolute top-0 start-0 bg-dark text-white m-2"
+                  >Featured</span
+                >
+                <span
+                  class="position-absolute top-0 end-0 bg-warning text-dark m-2"
+                  >For Sale</span
+                >
+
+                <!-- Property Image -->
+                <img
+                  src="https://amrawatiitcity.com/wp-content/uploads/2020/12/listing-3.jpg"
+                  alt=""
+                />
+
+                <!-- Logo & Price -->
+                <div class="poster_logo position-absolute bottom-0 start-0">
+                  <img
+                    src="https://palmvillasbonaire.com/wp-content/uploads/2017/06/partner-01-1.png"
+                    alt=""
+                  />
+                </div>
+                <div class="poster_rent position-absolute bottom-0 end-0">
+                  $8,600/month
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card_body" width="264px" height="34px">
+                <div class="property_name">
+                  <h5 class="poster_title m-0">Park Avenue Apartment</h5>
+                  <p class="text-muted my-1">Manhattan, New York</p>
+                </div>
+                <div class="poster_info">
+                  <div class="row">
+                    <div class="col-4" height="59px">
+                      <p>
+                        <i class="fas fa-ruler-combined"></i>&nbsp; 4800 Sqr.Ft
+                      </p>
+                      <p><i class="fas fa-tv"></i>&nbsp; 1 Tv Lounge</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-bed"></i>&nbsp; 2 Bed Rooms</p>
+                      <p><i class="fas fa-car"></i>&nbsp; 1 Garage</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-shower"></i>&nbsp; 1 Bath Room</p>
+                      <p><i class="fas fa-utensils"></i>&nbsp; 1 Kitchen</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <div class="footer-text">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+                    alt=""
+                  />
+                  &nbsp;2 Days ago
+                </div>
+                <div class="footer-icons d-flex flex-row">
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Card 1 -->
+
+          <!-- Card 2 -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card poster shadow-lg mb-3">
+              <!-- Card Header -->
+              <div
+                class="card-header position-relative p-0 overflow-hidden Badges"
+              >
+                <!-- Status Badges -->
+                <span
+                  class="position-absolute top-0 start-0 bg-dark text-white m-2"
+                  >Featured</span
+                >
+                <span
+                  class="position-absolute top-0 end-0 bg-warning text-dark m-2"
+                  >For Sale</span
+                >
+
+                <!-- Property Image -->
+                <img
+                  src="https://amrawatiitcity.com/wp-content/uploads/2020/12/listing-3.jpg"
+                  alt=""
+                />
+
+                <!-- Logo & Price -->
+                <div class="poster_logo position-absolute bottom-0 start-0">
+                  <img
+                    src="https://palmvillasbonaire.com/wp-content/uploads/2017/06/partner-01-1.png"
+                    alt=""
+                  />
+                </div>
+                <div class="poster_rent position-absolute bottom-0 end-0">
+                  $8,600/month
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card_body" width="264px" height="34px">
+                <div class="property_name">
+                  <h5 class="poster_title m-0">Park Avenue Apartment</h5>
+                  <p class="text-muted my-1">Manhattan, New York</p>
+                </div>
+                <div class="poster_info">
+                  <div class="row">
+                    <div class="col-4" height="59px">
+                      <p>
+                        <i class="fas fa-ruler-combined"></i>&nbsp; 4800 Sqr.Ft
+                      </p>
+                      <p><i class="fas fa-tv"></i>&nbsp; 1 Tv Lounge</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-bed"></i>&nbsp; 2 Bed Rooms</p>
+                      <p><i class="fas fa-car"></i>&nbsp; 1 Garage</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-shower"></i>&nbsp; 1 Bath Room</p>
+                      <p><i class="fas fa-utensils"></i>&nbsp; 1 Kitchen</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <div class="footer-text">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+                    alt=""
+                  />
+                  &nbsp;2 Days ago
+                </div>
+                <div class="footer-icons d-flex flex-row">
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Card 2 -->
+
+          <!-- Card 3 -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card poster shadow-lg mb-3">
+              <!-- Card Header -->
+              <div
+                class="card-header position-relative p-0 overflow-hidden Badges"
+              >
+                <!-- Status Badges -->
+                <span
+                  class="position-absolute top-0 start-0 bg-dark text-white m-2"
+                  >Featured</span
+                >
+                <span
+                  class="position-absolute top-0 end-0 bg-warning text-dark m-2"
+                  >For Sale</span
+                >
+
+                <!-- Property Image -->
+                <img
+                  src="https://amrawatiitcity.com/wp-content/uploads/2020/12/listing-3.jpg"
+                  alt=""
+                />
+
+                <!-- Logo & Price -->
+                <div class="poster_logo position-absolute bottom-0 start-0">
+                  <img
+                    src="https://palmvillasbonaire.com/wp-content/uploads/2017/06/partner-01-1.png"
+                    alt=""
+                  />
+                </div>
+                <div class="poster_rent position-absolute bottom-0 end-0">
+                  $8,600/month
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card_body" width="264px" height="34px">
+                <div class="property_name">
+                  <h5 class="poster_title m-0">Park Avenue Apartment</h5>
+                  <p class="text-muted my-1">Manhattan, New York</p>
+                </div>
+                <div class="poster_info">
+                  <div class="row">
+                    <div class="col-4" height="59px">
+                      <p>
+                        <i class="fas fa-ruler-combined"></i>&nbsp; 4800 Sqr.Ft
+                      </p>
+                      <p><i class="fas fa-tv"></i>&nbsp; 1 Tv Lounge</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-bed"></i>&nbsp; 2 Bed Rooms</p>
+                      <p><i class="fas fa-car"></i>&nbsp; 1 Garage</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-shower"></i>&nbsp; 1 Bath Room</p>
+                      <p><i class="fas fa-utensils"></i>&nbsp; 1 Kitchen</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <div class="footer-text">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+                    alt=""
+                  />
+                  &nbsp;2 Days ago
+                </div>
+                <div class="footer-icons d-flex flex-row">
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Card 3 -->
+
+          <!-- Card 4 -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card poster shadow-lg mb-3">
+              <!-- Card Header -->
+              <div
+                class="card-header position-relative p-0 overflow-hidden Badges"
+              >
+                <!-- Status Badges -->
+                <span
+                  class="position-absolute top-0 start-0 bg-dark text-white m-2"
+                  >Featured</span
+                >
+                <span
+                  class="position-absolute top-0 end-0 bg-warning text-dark m-2"
+                  >For Sale</span
+                >
+
+                <!-- Property Image -->
+                <img
+                  src="https://amrawatiitcity.com/wp-content/uploads/2020/12/listing-3.jpg"
+                  alt=""
+                />
+
+                <!-- Logo & Price -->
+                <div class="poster_logo position-absolute bottom-0 start-0">
+                  <img
+                    src="https://palmvillasbonaire.com/wp-content/uploads/2017/06/partner-01-1.png"
+                    alt=""
+                  />
+                </div>
+                <div class="poster_rent position-absolute bottom-0 end-0">
+                  $8,600/month
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card_body" width="264px" height="34px">
+                <div class="property_name">
+                  <h5 class="poster_title m-0">Park Avenue Apartment</h5>
+                  <p class="text-muted my-1">Manhattan, New York</p>
+                </div>
+                <div class="poster_info">
+                  <div class="row">
+                    <div class="col-4" height="59px">
+                      <p>
+                        <i class="fas fa-ruler-combined"></i>&nbsp; 4800 Sqr.Ft
+                      </p>
+                      <p><i class="fas fa-tv"></i>&nbsp; 1 Tv Lounge</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-bed"></i>&nbsp; 2 Bed Rooms</p>
+                      <p><i class="fas fa-car"></i>&nbsp; 1 Garage</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-shower"></i>&nbsp; 1 Bath Room</p>
+                      <p><i class="fas fa-utensils"></i>&nbsp; 1 Kitchen</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <div class="footer-text">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+                    alt=""
+                  />
+                  &nbsp;2 Days ago
+                </div>
+                <div class="footer-icons d-flex flex-row">
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Card 4 -->
+          <!-- Card 1 -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card poster shadow-lg mb-3">
+              <!-- Card Header -->
+              <div
+                class="card-header position-relative p-0 overflow-hidden Badges"
+              >
+                <!-- Status Badges -->
+                <span
+                  class="position-absolute top-0 start-0 bg-dark text-white m-2"
+                  >Featured</span
+                >
+                <span
+                  class="position-absolute top-0 end-0 bg-warning text-dark m-2"
+                  >For Sale</span
+                >
+
+                <!-- Property Image -->
+                <img
+                  src="https://amrawatiitcity.com/wp-content/uploads/2020/12/listing-3.jpg"
+                  alt=""
+                />
+
+                <!-- Logo & Price -->
+                <div class="poster_logo position-absolute bottom-0 start-0">
+                  <img
+                    src="https://palmvillasbonaire.com/wp-content/uploads/2017/06/partner-01-1.png"
+                    alt=""
+                  />
+                </div>
+                <div class="poster_rent position-absolute bottom-0 end-0">
+                  $8,600/month
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card_body" width="264px" height="34px">
+                <div class="property_name">
+                  <h5 class="poster_title m-0">Park Avenue Apartment</h5>
+                  <p class="text-muted my-1">Manhattan, New York</p>
+                </div>
+                <div class="poster_info">
+                  <div class="row">
+                    <div class="col-4" height="59px">
+                      <p>
+                        <i class="fas fa-ruler-combined"></i>&nbsp; 4800 Sqr.Ft
+                      </p>
+                      <p><i class="fas fa-tv"></i>&nbsp; 1 Tv Lounge</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-bed"></i>&nbsp; 2 Bed Rooms</p>
+                      <p><i class="fas fa-car"></i>&nbsp; 1 Garage</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-shower"></i>&nbsp; 1 Bath Room</p>
+                      <p><i class="fas fa-utensils"></i>&nbsp; 1 Kitchen</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <div class="footer-text">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+                    alt=""
+                  />
+                  &nbsp;2 Days ago
+                </div>
+                <div class="footer-icons d-flex flex-row">
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Card 1 -->
+
+          <!-- Card 2 -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card poster shadow-lg mb-3">
+              <!-- Card Header -->
+              <div
+                class="card-header position-relative p-0 overflow-hidden Badges"
+              >
+                <!-- Status Badges -->
+                <span
+                  class="position-absolute top-0 start-0 bg-dark text-white m-2"
+                  >Featured</span
+                >
+                <span
+                  class="position-absolute top-0 end-0 bg-warning text-dark m-2"
+                  >For Sale</span
+                >
+
+                <!-- Property Image -->
+                <img
+                  src="https://amrawatiitcity.com/wp-content/uploads/2020/12/listing-3.jpg"
+                  alt=""
+                />
+
+                <!-- Logo & Price -->
+                <div class="poster_logo position-absolute bottom-0 start-0">
+                  <img
+                    src="https://palmvillasbonaire.com/wp-content/uploads/2017/06/partner-01-1.png"
+                    alt=""
+                  />
+                </div>
+                <div class="poster_rent position-absolute bottom-0 end-0">
+                  $8,600/month
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card_body" width="264px" height="34px">
+                <div class="property_name">
+                  <h5 class="poster_title m-0">Park Avenue Apartment</h5>
+                  <p class="text-muted my-1">Manhattan, New York</p>
+                </div>
+                <div class="poster_info">
+                  <div class="row">
+                    <div class="col-4" height="59px">
+                      <p>
+                        <i class="fas fa-ruler-combined"></i>&nbsp; 4800 Sqr.Ft
+                      </p>
+                      <p><i class="fas fa-tv"></i>&nbsp; 1 Tv Lounge</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-bed"></i>&nbsp; 2 Bed Rooms</p>
+                      <p><i class="fas fa-car"></i>&nbsp; 1 Garage</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-shower"></i>&nbsp; 1 Bath Room</p>
+                      <p><i class="fas fa-utensils"></i>&nbsp; 1 Kitchen</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <div class="footer-text">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+                    alt=""
+                  />
+                  &nbsp;2 Days ago
+                </div>
+                <div class="footer-icons d-flex flex-row">
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Card 2 -->
+
+          <!-- Card 3 -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card poster shadow-lg mb-3">
+              <!-- Card Header -->
+              <div
+                class="card-header position-relative p-0 overflow-hidden Badges"
+              >
+                <!-- Status Badges -->
+                <span
+                  class="position-absolute top-0 start-0 bg-dark text-white m-2"
+                  >Featured</span
+                >
+                <span
+                  class="position-absolute top-0 end-0 bg-warning text-dark m-2"
+                  >For Sale</span
+                >
+
+                <!-- Property Image -->
+                <img
+                  src="https://amrawatiitcity.com/wp-content/uploads/2020/12/listing-3.jpg"
+                  alt=""
+                />
+
+                <!-- Logo & Price -->
+                <div class="poster_logo position-absolute bottom-0 start-0">
+                  <img
+                    src="https://palmvillasbonaire.com/wp-content/uploads/2017/06/partner-01-1.png"
+                    alt=""
+                  />
+                </div>
+                <div class="poster_rent position-absolute bottom-0 end-0">
+                  $8,600/month
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card_body" width="264px" height="34px">
+                <div class="property_name">
+                  <h5 class="poster_title m-0">Park Avenue Apartment</h5>
+                  <p class="text-muted my-1">Manhattan, New York</p>
+                </div>
+                <div class="poster_info">
+                  <div class="row">
+                    <div class="col-4" height="59px">
+                      <p>
+                        <i class="fas fa-ruler-combined"></i>&nbsp; 4800 Sqr.Ft
+                      </p>
+                      <p><i class="fas fa-tv"></i>&nbsp; 1 Tv Lounge</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-bed"></i>&nbsp; 2 Bed Rooms</p>
+                      <p><i class="fas fa-car"></i>&nbsp; 1 Garage</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-shower"></i>&nbsp; 1 Bath Room</p>
+                      <p><i class="fas fa-utensils"></i>&nbsp; 1 Kitchen</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <div class="footer-text">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+                    alt=""
+                  />
+                  &nbsp;2 Days ago
+                </div>
+                <div class="footer-icons d-flex flex-row">
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Card 3 -->
+
+          <!-- Card 4 -->
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card poster shadow-lg mb-3">
+              <!-- Card Header -->
+              <div
+                class="card-header position-relative p-0 overflow-hidden Badges"
+              >
+                <!-- Status Badges -->
+                <span
+                  class="position-absolute top-0 start-0 bg-dark text-white m-2"
+                  >Featured</span
+                >
+                <span
+                  class="position-absolute top-0 end-0 bg-warning text-dark m-2"
+                  >For Sale</span
+                >
+
+                <!-- Property Image -->
+                <img
+                  src="https://amrawatiitcity.com/wp-content/uploads/2020/12/listing-3.jpg"
+                  alt=""
+                />
+
+                <!-- Logo & Price -->
+                <div class="poster_logo position-absolute bottom-0 start-0">
+                  <img
+                    src="https://palmvillasbonaire.com/wp-content/uploads/2017/06/partner-01-1.png"
+                    alt=""
+                  />
+                </div>
+                <div class="poster_rent position-absolute bottom-0 end-0">
+                  $8,600/month
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="card_body" width="264px" height="34px">
+                <div class="property_name">
+                  <h5 class="poster_title m-0">Park Avenue Apartment</h5>
+                  <p class="text-muted my-1">Manhattan, New York</p>
+                </div>
+                <div class="poster_info">
+                  <div class="row">
+                    <div class="col-4" height="59px">
+                      <p>
+                        <i class="fas fa-ruler-combined"></i>&nbsp; 4800 Sqr.Ft
+                      </p>
+                      <p><i class="fas fa-tv"></i>&nbsp; 1 Tv Lounge</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-bed"></i>&nbsp; 2 Bed Rooms</p>
+                      <p><i class="fas fa-car"></i>&nbsp; 1 Garage</p>
+                    </div>
+                    <div class="col-4" height="59px">
+                      <p><i class="fas fa-shower"></i>&nbsp; 1 Bath Room</p>
+                      <p><i class="fas fa-utensils"></i>&nbsp; 1 Kitchen</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card Footer -->
+              <div class="card-footer">
+                <div class="footer-text">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/747/747310.png"
+                    alt=""
+                  />
+                  &nbsp;2 Days ago
+                </div>
+                <div class="footer-icons d-flex flex-row">
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="icons_box">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1358/1358023.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Card 4 -->
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
